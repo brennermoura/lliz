@@ -41,24 +41,24 @@ export default function Header() {
             >
               Serviços
             </button>
-            <button
+            {/* <button
               onClick={() => scrollToSection("about")}
               className="text-gray-700 hover:text-green-600 transition-colors"
             >
               Sobre
-            </button>
+            </button> */}
             <button
               onClick={() => scrollToSection("gallery")}
               className="text-gray-700 hover:text-green-600 transition-colors"
             >
               Galeria
             </button>
-            <button
+            {/* <button
               onClick={() => scrollToSection("reviews")}
               className="text-gray-700 hover:text-green-600 transition-colors"
             >
               Avaliações
-            </button>
+            </button> */}
             <button
               onClick={() => scrollToSection("faq")}
               className="text-gray-700 hover:text-green-600 transition-colors"

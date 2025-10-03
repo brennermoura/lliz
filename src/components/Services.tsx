@@ -26,9 +26,9 @@ import {
 const services = [
   {
     icon: PackageSearch,
-    title: "Gestão e Destinação de Resíduos Industriais",
+    title: "Transporte de Resíduos Industriais e Sanitários",
     description:
-      "Coletamos e damos a destinação correta para resíduos perigosos e não perigosos. Sua empresa em conformidade com as normas, protegendo o meio ambiente.",
+      "Gestão completa de resíduos industriais e efluentes sanitários. Coletamos e garantimos a destinação correta, protegendo sua empresa e o meio ambiente.",
     features: [
       "Coleta de resíduos perigosos e não perigosos",
       "Transporte seguro com veículos homologados",
@@ -51,19 +51,6 @@ const services = [
     price: "Consulte-nos",
   },
   {
-    icon: Droplet,
-    title: "Coleta e Tratamento de Efluentes Sanitários",
-    description:
-      "Serviço completo para coleta, transporte e tratamento de efluentes (esgoto). Solução ágil e segura para indústrias, empresas e condomínios.",
-    features: [
-      "Coleta de esgoto e água servida",
-      "Caminhões equipados com bomba de sucção a vácuo",
-      "Transporte para estações de tratamento",
-      "Atendimento a empresas, condomínios e indústrias",
-    ],
-    price: "Consulte-nos",
-  },
-  {
     icon: BatteryCharging,
     title: "Reciclagem e Descarte de Pilhas e Baterias",
     description:
@@ -73,19 +60,6 @@ const services = [
       "Transporte seguro de resíduos perigosos",
       "Encaminhamento para reciclagem especializada",
       "Redução do impacto ambiental",
-    ],
-    price: "Consulte-nos",
-  },
-  {
-    icon: FlaskConical,
-    title: "Coleta e Tratamento de Efluentes Industriais",
-    description:
-      "Manejo seguro de efluentes líquidos industriais e perigosos. Nossa equipe realiza a coleta, transporte e tratamento para proteger o meio ambiente e sua empresa.",
-    features: [
-      "Coleta de efluentes líquidos industriais",
-      "Transporte para tratamento e disposição final",
-      "Caminhões equipados para resíduos químicos",
-      "Cumprimento das normas ambientais (CONAMA e CETESB)",
     ],
     price: "Consulte-nos",
   },
@@ -124,7 +98,7 @@ export default function Services() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
           {services.map((service, index) => (
             <Card key={index} className=" border-0 shadow-xl">
               <CardHeader className="pb-4">

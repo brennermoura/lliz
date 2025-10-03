@@ -38,26 +38,45 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const res = await fetch("/api/sendmail.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        toast({
+          title: "Mensagem enviada com sucesso!",
+          description: "Nossa equipe entrará em contato em até 24 horas.",
+        });
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          service: "",
+          message: "",
+        });
+      } else {
+        throw new Error(data.error || "Erro ao enviar mensagem");
+      }
+    } catch (err) {
       toast({
-        title: "Mensagem enviada com sucesso!",
-        description: "Nossa equipe entrará em contato em até 24 horas.",
+        title: "Erro ao enviar mensagem",
+        description: "Tente novamente em alguns minutos.",
+        variant: "destructive",
       });
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        service: "",
-        message: "",
-      });
-    }, 2000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

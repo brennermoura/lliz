@@ -3,7 +3,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { X } from "lucide-react";
 
 // Gerando a lista de clientes dinamicamente, mantendo apenas o necessário.
-const galleryItems = Array.from({ length: 12 }, (_, i) => ({
+const galleryItems = Array.from({ length: 18 }, (_, i) => ({
   id: i + 1,
   title: `Cliente ${i + 1}`,
   image: `/clients/cliente${i + 1}.png`,
