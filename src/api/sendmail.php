@@ -1,7 +1,15 @@
 <?php
 // Mostrar erros em caso de debug (remover em produção)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+
+// INCLUIR CLASSES PHPMailer:
+require_once __DIR__ . '/PHPMailer.php';
+require_once __DIR__ . '/SMTP.php';
+require_once __DIR__ . '/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // Receber dados em JSON
 $data = json_decode(file_get_contents("php://input"), true);
@@ -15,13 +23,7 @@ $message = $data['message'] ?? '';
 
 // Destinatário
 $to = "administrativo@lliz.com.br";
-$subject = "📩 Novo contato do site";
-
-// Cabeçalhos do e-mail
-$headers  = "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-$headers .= "From: $name <$email>\r\n";
-$headers .= "Reply-To: $email\r\n";
+$subject = "Novo contato do site";
 
 // Corpo do e-mail em HTML
 $body = "
@@ -40,9 +42,28 @@ $body = "
 </html>
 ";
 
-// Envio
-if (mail($to, $subject, $body, $headers)) {
+$mail = new PHPMailer(true);
+
+try {
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.lliz.com.br'; // AJUSTE PARA SEU PROVEDOR!
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'administrativo@lliz.com.br'; // SEU EMAIL DE ENVIO
+    $mail->Password   = '@j1608@d1804';         // SENHA DO EMAIL
+    $mail->SMTPSecure = 'tls';                    // 'ssl' ou 'tls' (veja as opções do seu servidor)
+    $mail->Port       = 587;                      // 465 para SSL, 587 para TLS
+
+    $mail->setFrom($mail->Username, $name);
+    $mail->addAddress($to);
+    $mail->addReplyTo($email);
+
+    $mail->isHTML(true);
+    $mail->Subject = $subject;
+    $mail->Body    = $body;
+
+    $mail->send();
     echo json_encode(["success" => true]);
-} else {
-    echo json_encode(["success" => false, "error" => "Erro ao enviar email"]);
+} catch (Exception $e) {
+    echo json_encode(["success" => false, "error" => $mail->ErrorInfo]);
 }
+?>
